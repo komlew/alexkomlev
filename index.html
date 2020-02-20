@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Alex Komlev. Frontend developer. Amsterdam</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Hi, I'm JavaScript developer. My main focus is positive user experience. I'm familiar with modern web technologies and the whole cycle of websites development from concept to ship and beyond. I have more than twelve years of experince and dozens of designed and launched websites."/>
+    <link rel="shortcut icon" href="https://alexkomlev.com/favicon.ico"/>
+    <link rel="icon" href="https://alexkomlev.com/favicon.png" type="image/png"/>
+    <link rel="canonical" href="https://alexkomlev.com/" />
+    <meta property="og:title" content="Alex Komlev. Frontend developer. Amsterdam"/>
+    <meta property="og:url" content="https://alexkomlev.com/"/>
+    <meta property="og:image" content="https://alexkomlev.com/pixelman.png"/>
+    <meta property="og:description" content="Hi, I'm JavaScript developer. My main focus is positive user experience. I'm familiar with modern web technologies and the whole cycle of websites development from concept to ship and beyond. I have more than twelve years of experince and dozens of designed and launched websites."/>
+    <style>
+        body {
+            margin: 5vh 0;
+            background-color: #f4ebe2;
+            overflow: hidden;
+            font-size: 20px;
+        }
+        section {
+            position: absolute;
+            left: 50%;
+            -webkit-transform: translateX(-65%);
+                -ms-transform: translateX(-65%);
+                    transform: translateX(-65%);
+        }
+        #hi {
+            position: absolute;
+            -webkit-animation: swing 0.8s alternate cubic-bezier(1, 0.5, 0.5, 1) infinite;
+               -moz-animation: swing 0.8s alternate cubic-bezier(1, 0.5, 0.5, 1) infinite;
+                    animation: swing 0.8s alternate cubic-bezier(1, 0.5, 0.5, 1) infinite;
+        }
+        @-webkit-keyframes swing {from {margin: 0;} to {margin: -4px 0 0 6px;}}
+           @-moz-keyframes swing {from {margin: 0;} to {margin: -4px 0 0 6px;}}
+                @keyframes swing {from {margin: 0;} to {margin: -4px 0 0 6px;}}
+    </style>
+</head>
+<body>
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5BG75C" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-5BG75C');</script>
+
+    <section>
+        <canvas id="man" width="650" height="832"></canvas>
+        <canvas id="hi" width="18" height="16"></canvas>
+    </section>
+
+    <script type="text/javascript">
+        (function () {
+            'use strict';
+            var size = 12;
+            var scale = 1;
+
+            var canvas = document.getElementById('man');
+            var canvashi = document.getElementById('hi');
+
+            var man = new Image();
+            man.src = 'data:image/gif;base64,R0lGODlhMgBAAMQAAJBoSJCxyfGVbLLP2+h0SQAAAGhXToagp1xtcf/er5txUTQ0NHtmW/WqeKF1VdHp8PrAhfTr4gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAyMDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjAxODAxMTc0MDcyMDY4MTFBRjZGOUE4QThDQzQwMzYwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjZDNzhCNzlEMjAyMjExRTRBOTMzOTkxMDQzMDYxQUU3IiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjZDNzhCNzlDMjAyMjExRTRBOTMzOTkxMDQzMDYxQUU3IiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgTWFjaW50b3NoIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MDY4MDExNzQwNzIwNjgxMUFGNkY5QThBOENDNDAzNjAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDE4MDExNzQwNzIwNjgxMUFGNkY5QThBOENDNDAzNjAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4B//79/Pv6+fj39vX08/Lx8O/u7ezr6uno5+bl5OPi4eDf3t3c29rZ2NfW1dTT0tHQz87NzMvKycjHxsXEw8LBwL++vby7urm4t7a1tLOysbCvrq2sq6qpqKempaSjoqGgn56dnJuamZiXlpWUk5KRkI+OjYyLiomIh4aFhIOCgYB/fn18e3p5eHd2dXRzcnFwb25tbGtqaWhnZmVkY2JhYF9eXVxbWllYV1ZVVFNSUVBPTk1MS0pJSEdGRURDQkFAPz49PDs6OTg3NjU0MzIxMC8uLSwrKikoJyYlJCMiISAfHh0cGxoZGBcWFRQTEhEQDw4NDAsKCQgHBgUEAwIBAAAh+QQAAAAAACwAAAAAMgBAAAAF/2AkjmRpRoCjrurpvjCZsvTsxDhs0yqw37ng6Ofz8VjC4O/IBCZfy6bDiHyelpBsjeqA2KwmXnbMUrDGX7AIqz2O3zP1mkY+v+9tp3U2w/v9cWp8Kn+FaC1gNn2GhimCPSuMjXpJg4SSf46JU5GYmZRCKTZ1nX5niHt2EEcCdwJMj5eef6hPba4Iua14ArkIu7VCdXgHxYXFB2MCrVYQyxAMxMauWcjKzLbLAtGeu37YSVnL3GMJhd5Z5uIQYM7bkrvo1O1Z5FkN+G+t6vf562r1DGm75oeBnAjQBBIgII6AvHoHI9jrd2ehQ4pjDB6cCMFfRgbkPEKLyHGMAZAoUf8awKNRDshCFmMyzAiRZMksMmfeARkxwslZBXuK+PknZUEDQn2+9INPZL2WPRucvOkUGgOkSfFN9QQSa1atKBl1TSriQVOpKZc+HUv2gdmzU9PK9SrU7dmmcec2eEA2gtu3d/GlPNmUb9K/gAMrxuf2MOLFkBv3HIDYLuS7fwccdEu5cuLLmQ0/QdzZ8+fAlUsH8Vza9IDXZ1+zrgzD9IPWpgMEGIBvQADXpk3YDm26gHHdyI3Ptl12OPHKxo0vmE49emrn2Dl7Tl6AevUCuklnx44bue7u3heY/619uN/spdfrTq9+fXvm4yn7Dl/ZO/u/u93mXnPOyTZcANa5hhsuYiSM51x6Dv51QoSeQRhhbRS6RZ+DOWS4YXZJOEjfAtipkd2IJAbnWH8jMohDCAA7';
+
+            var hi = new Image();
+            hi.src = 'data:image/gif;base64,R0lGODlhEgAQAJEAAPTr4gAAAP///wAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAyMDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo2Qzc4QjdBNDIwMjIxMUU0QTkzMzk5MTA0MzA2MUFFNyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo0RTYwNjk3MjIwMjQxMUU0QTkzMzk5MTA0MzA2MUFFNyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjZDNzhCN0EyMjAyMjExRTRBOTMzOTkxMDQzMDYxQUU3IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjZDNzhCN0EzMjAyMjExRTRBOTMzOTkxMDQzMDYxQUU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAAAAAAAsAAAAABIAEAAAAjUEgqlqJw9jDE7aGa4WaL4MYh5HZlB3JqV4fqSEuqv50Rt7T1XONXG9aBhoCKFxWDseGUpjAQA7';
+
+            function getPixel(data, x, y, z) {
+                var index = (y * z + x) * 4;
+                var r = data[index];
+                var g = data[index + 1];
+                var b = data[index + 2];
+                return [('rgb(' + r + ', ' + g + ', ' + b + ')'), r, g, b];
+            }
+
+            function PixelRendering(ctx, stack) {
+                var self = this;
+                this.drawPixel = function () {
+                    if (!stack.length) {
+                        self.stop();
+                        return;
+                    }
+                    var pixel = stack.splice(Math.floor(Math.random() * stack.length), 1)[0];
+                    ctx.fillStyle = 'rgb(196, 174, 155)'; // border color
+                    ctx.fillRect(
+                        pixel.x * (size + 1) * scale - 1,
+                        pixel.y * (size + 1) * scale - 1,
+                        size * scale + 2,
+                        size * scale + 2
+                    );
+
+                    ctx.fillStyle = pixel.color;
+                    ctx.fillRect(
+                        pixel.x * (size + 1) * scale,
+                        pixel.y * (size + 1) * scale,
+                        size * scale,
+                        size * scale
+                    );
+                };
+                this.start = function (times) {
+                    var count = times;
+                    while (count > 0) {
+                        if (self.done) {
+                            return;
+                        }
+                        self.drawPixel();
+                        count--;
+                    }
+                    setTimeout(function () {
+                        self.start(times);
+                    }, 0);
+                };
+                this.stop = function () {
+                    self.done = true;
+
+                    // dispatchEvent with IE9+ support
+                    var ready = document.createEvent('Event');
+                    ready.initEvent('ready', true, true);
+                    ctx.canvas.dispatchEvent(ready);
+                };
+            }
+
+            function draw(canvas, img, times) {
+                var ctx = canvas.getContext('2d');
+                ctx.restore();
+                ctx.save();
+                ctx.drawImage(img, 0, 0);
+                var width = img.width;
+                var height = img.height;
+                var stack = [];
+
+                var imgData = ctx.getImageData(0, 0, width, height);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.translate(1, 1);
+
+                for (var x = 0; x < width; x++) {
+                    for (var y = 0; y < height; y++) {
+                        var pixelColor = getPixel(imgData.data, x, y, width);
+                        // filter out background color and its shades
+                        if (!(Math.abs(pixelColor[1] - 244) < 5 &&
+                                Math.abs(pixelColor[2] - 235) < 5 &&
+                                Math.abs(pixelColor[3] - 226) < 5)) {
+                            stack.push({
+                                x: x,
+                                y: y,
+                                color: pixelColor[0]
+                            });
+                        }
+                    }
+                }
+                var rendering = new PixelRendering(ctx, stack);
+                rendering.start(times);
+            }
+
+            window.addEventListener('load', function () {
+                var manW = man.width;
+                var manH = man.height;
+
+                if (window.innerWidth < (manW * (size + 1) * 1.5) * scale) {
+                    size = Math.floor(window.innerWidth / scale / manW * 0.6);
+                }
+                if (window.innerHeight < (manH * (size + 1) * 1.2) * scale) {
+                    size = Math.floor(window.innerHeight / scale / manH * 0.8);
+                }
+
+                canvas.width  = (manW * (size + 1) + 1) * scale;
+                canvas.height = (manH * (size + 1) + 1) * scale;
+
+                canvashi.width  = (hi.width * (size + 1) + 1) * scale;
+                canvashi.height = (hi.height * (size + 1) + 1) * scale;
+                canvashi.style.left = (47 * (size + 1)) * scale + 'px';
+                canvashi.style.top  = (12 * (size + 1)) * scale + 'px';
+
+                draw(canvas, man, 10);
+
+                document.addEventListener('click', function () {
+                    draw(canvas, man, 10);
+                }, false);
+                canvas.addEventListener('ready', function () {
+                    draw(canvashi, hi, 4);
+                }, false);
+            });
+        })();
+    </script>
+</body>
+</html>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ ╭──────╮ ╭─╮     ╭─────╮ ╭─╮   ╭─╮ ╭─╮ ╭──╮ ╭──────╮ ╭─╮   ╭─╮ ╭─╮     ╭─────╮ ╭─╮   ╭─╮    ╭─────╮ ╭──────╮ ╭─╮   ╭─╮
+ │ ╭──╮ │ │ │     │ ╭───╯ ╰╮╰╮ ╭╯╭╯ │ │╭╯╭─╯ │ ╭──╮ │ │ ╰╮ ╭╯ │ │ │     │ ╭───╯ │ │   │ │    │ ╭───╯ │ ╭──╮ │ │ ╰╮ ╭╯ │
+ │ │  │ │ │ │     │ ╰───╮  ╰╮╰─╯╭╯  │ ╰╯╭╯   │ │  │ │ │  ╰─╯  │ │ │     │ ╰───╮ ╰╮╰╮ ╭╯╭╯    │ │     │ │  │ │ │  ╰─╯  │
+ │ ╰──╯ │ │ │     │ ╭───╯  ╭╯╭─╮╰╮  │ ╭╮╰╮   │ │  │ │ │ ╭╮ ╭╮ │ │ │     │ ╭───╯  ╰╮╰─╯╭╯     │ │     │ │  │ │ │ ╭╮ ╭╮ │
+ │ ╭──╮ │ │ ╰───╮ │ ╰───╮ ╭╯╭╯ ╰╮╰╮ │ │╰╮╰─╮ │ ╰──╯ │ │ │╰─╯│ │ │ ╰───╮ │ ╰───╮   ╰╮ ╭╯  ╭─╮ │ ╰───╮ │ ╰──╯ │ │ │╰─╯│ │
+ ╰─╯  ╰─╯ ╰─────╯ ╰─────╯ ╰─╯   ╰─╯ ╰─╯ ╰──╯ ╰──────╯ ╰─╯   ╰─╯ ╰─────╯ ╰─────╯    ╰─╯   ╰─╯ ╰─────╯ ╰──────╯ ╰─╯   ╰─╯
+ - - - - - - - - - - - - - - - - - - - - - - - - - hi@alexkomlev.com - - - - - - - - - - - - - - - - - - - - - - - - -->
